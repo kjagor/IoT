@@ -1,0 +1,11 @@
+from machine import Pin
+from time import sleep
+pin_led = Pin(14, mode=Pin.OUT)    # D13 on Wemos D1, on-board LED connected (SCK)
+pin_button =  Pin(0, mode=Pin.IN)  # D8 on Wemos D1
+turned_on = False
+while True:
+    if not pin_button.value():
+        turned_on = not turned_on
+    pin_led.value(turned_on)
+    sleep(0.01) # Sleep for 10ms
+    
