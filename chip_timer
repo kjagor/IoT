@@ -1,0 +1,15 @@
+from machine import Pin, Timer
+from time import sleep
+
+pin_led = Pin(14, mode=Pin.OUT)    # D13 on Wemos D1, on-board LED connected (SCK)
+pin_button =  Pin(0, mode=Pin.IN)  # D8 on Wemos D1
+timer = Timer(-1)
+
+def timeout_callback(t):
+    pin_led(0)
+
+def button_callback(p):
+    pin_led(1)
+    timer.init(period=1000, mode=Timer.ONE_SHOT, callback=timeout_callback)
+
+pin_button.irq(trigger=Pin.IRQ_FALLING, handler=button_callback)
