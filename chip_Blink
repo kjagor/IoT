@@ -1,0 +1,10 @@
+# ESP-01
+from time import sleep
+from machine import Pin, reset
+tx = Pin(1, mode=Pin.OUT)
+for i in range(0,10):
+    tx.value(0) # Polarity inverted, pin sinks 3.3v
+    sleep(0.2)
+    tx.value(1)
+    sleep(0.2)
+reset() # UART transmit pin is dead by now, reset device to restore serial
