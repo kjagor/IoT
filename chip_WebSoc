@@ -1,0 +1,10 @@
+server {
+    listen 80;
+    server_name iot.koodur.com;
+    root /var/www/iot;
+    location ~ "^/ws/(.*?)" {
+        nchan_channel_id $1;
+        nchan_pubsub websocket;
+        nchan_message_buffer_length 0;
+    }
+}
